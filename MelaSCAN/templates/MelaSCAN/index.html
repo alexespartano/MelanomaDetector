@@ -1,0 +1,28 @@
+{% extends "MelaSCAN/layout.html" %}
+
+{% block body %}
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Select an image of the mole</h2>
+
+        <!-- Formulario para subir la imagen -->
+        <form method="POST" enctype="multipart/form-data" action="{% url 'scan' %}">
+            {% csrf_token %}
+            
+            <!-- Campo para cargar la imagen -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Select an image of the mole</label>
+                <input class="form-control" type="file" id="image" name="image" required>
+            </div>
+
+            <!-- Botón para enviar la imagen -->
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
+
+        <!-- Mostrar resultado de la predicción -->
+        {% if prediction %}
+            <div class="mt-4 alert alert-info">
+                Result: <strong>{{ prediction }}</strong>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

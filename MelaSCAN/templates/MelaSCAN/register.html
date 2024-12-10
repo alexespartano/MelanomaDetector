@@ -1,0 +1,52 @@
+{% extends "MelaSCAN/layout.html" %}
+
+{% block body %}
+    <!-- Contenedor principal para centrar el formulario -->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-lg" style="width: 400px; border-radius: 15px;">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4" style="color: #0056b3;">Register</h2>
+
+                <!-- Formulario de registro -->
+                <form action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    
+                    <!-- Campo de nombre de usuario -->
+                    <div class="form-group mb-3">
+                        <input class="form-control" autofocus type="text" name="username" placeholder="Username" required>
+                    </div>
+                    
+                    <!-- Campo de correo electrónico -->
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="email" name="email" placeholder="Email" required>
+                    </div>
+                    
+                    <!-- Campo de contraseña -->
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                    </div>
+
+                    <!-- Confirmar contraseña -->
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
+                    </div>
+
+                    <!-- Botón de registro -->
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+
+                <!-- Mensaje de error si existe -->
+                {% if message %}
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+
+                <!-- Enlace para iniciar sesión -->
+                <div class="mt-3 text-center">
+                    <p>Already have an account? <a href="{% url 'login' %}" class="text-primary">Log In here.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
